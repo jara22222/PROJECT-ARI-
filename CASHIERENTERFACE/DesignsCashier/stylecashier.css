@@ -1,0 +1,38 @@
+body, html{
+    background-color: #faf3f3 !important;
+    overflow-x: hidden;
+}
+
+.navbar {
+    background-color: #faf3f3 !important;
+    border-bottom: 1px solid rgb(41, 41, 41) !important;
+}
+
+.navbar .navbar-brand {
+    font-family: 'Onest', sans-serif !important;  
+    font-size: 23px !important;
+    letter-spacing: 1px !important;
+    font-weight: bold !important;
+    color: #030202 !important;
+
+}
+
+/* 
+.sidebar {
+    background-color: #c7c57e !important; 
+    width: 70px !important; 
+    height: 35rem;
+    border-top-right-radius: 50px;  
+    border-bottom-right-radius: 50px;  
+    border-top-left-radius: 0;  
+    border-bottom-left-radius: 0; 
+    overflow-x: hidden;
+} */
+
+/* 
+.nav-link {
+    color: #030202 !important; 
+} */
+
+
+    

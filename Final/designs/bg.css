@@ -1,0 +1,29 @@
+body{
+    
+    height: 100vh;
+    background-image: url('../designs/login.png') !important;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    image-rendering: crisp-edges ;
+    image-rendering: -webkit-optimize-contrast; 
+    
+    
+    
+}
+
+.log {
+    background: rgba(255, 253, 253, 0.222); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 15px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.gg{
+   scale: 100%;
+}
