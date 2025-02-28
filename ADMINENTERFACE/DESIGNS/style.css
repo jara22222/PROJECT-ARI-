@@ -1,6 +1,5 @@
-/* Global Styles */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
     background: #f3f7ff;
     margin: 0;
     padding: 0;
@@ -250,7 +249,7 @@ a{
 
 /* Show dropdown when active */
 .dropdown.active .dropdown-menu {
-    display: block;
+    display: block !important; 
     background-color: #ffffff;
     border-radius: 15px;
 }
@@ -298,6 +297,7 @@ a{
 /* Main Content */
 .main-content {
     margin-left: 95px; /* Adjust to match sidebar width */
+    padding-right: 50px;
     width: calc(100% - 95px);
     height: 100vh;
     overflow-y: auto;
@@ -388,3 +388,4 @@ a{
 .sidebar {
     overflow-y: scroll;
 }
+
