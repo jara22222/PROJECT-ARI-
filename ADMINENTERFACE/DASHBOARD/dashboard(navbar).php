@@ -1,3 +1,9 @@
+<?php
+include("../database/database.php");   
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +27,6 @@
 </head>
 
 <body>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="logo-container">
@@ -32,29 +37,29 @@
         </div>
 
         <div class="container menu-container">
-            <ul>
-                <h6 class="menu-title">Actions</h6>
-                <li><i class="fas fa-chart-line"></i> <span>Dashboard</span></li>
-                <li><i class="fas fa-users"></i> <span>Employee</span></li>
-                <li><i class="bi bi-person-lines-fill"></i></i> <span>Roles</span></li>
-                <li><i class="bi bi-building"></i><span>Suppliers</span></li>
-                <li><a class="text-truncate" href="../product/add_product.php">Add product</a></li>
+ <ul>
+                    <h6 class="menu-title">Actions</h6>
+                    <li><i class="fas fa-chart-line"></i> <span>Dashboard</span></li>
+                    <li><i class="fas fa-users"></i> <span>Employee</span></li>
+                    <li><i class="bi bi-person-lines-fill"></i></i> <span>Roles</span></li>
+                    <li><i class="bi bi-building"></i><span>Suppliers</span></li>
+                    <li><i class="bi bi-plus-square"></i><a href="add_product.php"><span>Add products</span></a></li>
 
-                <li class="dropdown" onclick="toggleDropdown(this,event)">
-                    <i class="fas fa-bars"></i>
-                    <span class="dropdown-text">Products</span>
-                    <i class="fas fa-chevron-right arrow-icon"></i>
-                    <ul class="dropdown-menu">
-                        <li><a class="text-truncate" href="../product/coffee.php">Coffee</a></li>
-                        <li><a class="text-truncate" href="../product/pastry.php">Pastry</a></li>
-                        <li><a class="text-truncate" href="../product/rice_meal.php">Rice meal</a></li>
-                    </ul>
-                </li>
 
-                <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
-                <li><i class="fas fa-wallet"></i> <span>Transactions</span></li>
-            </ul>
+                    <li class="dropdown" onclick="toggleDropdown(this,event)">
+                        <i class="bi bi-view-stacked"></i>
+                        <span class="dropdown-text">View Products</span>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="text-truncate" href="../product/coffee.php">View Coffee</a></li>
+                            <li><a class="text-truncate" href="../product/pastry.php">View Pastry</a></li>
+                            <li><a class="text-truncate" href="../product/rice_meal.php">View Rice Meal</a></li>
+                        </ul>
+                    </li>
 
+                    <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
+                    <li><i class="fas fa-wallet"></i> <span>Transactions</span></li>
+                </ul>
             <ul class="settings-container">
                 <h6 class="menu-title text-truncate px-3">Appearance</h6>
                 <li class="toggle-item">

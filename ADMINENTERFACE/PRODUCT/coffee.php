@@ -15,10 +15,12 @@ $totalProducts = $totalRow['total'];
 $totalPages = ceil($totalProducts / $limit);
 
 
-$sql = "SELECT p.PID, p.product_name, p.product_description,p.product_type,p.status, p.image, p.stocks, p.price,date_format(p.date,'%M. %e, %Y - %l:%i %p') 'date',
+$sql = "SELECT p.PID, p.product_name, p.product_description,p.status,pt.type_name, p.image, p.stocks, p.price,date_format(p.date,'%M. %e, %Y - %l:%i %p') 'date',
                 s.company_name 
             FROM products p
-            LEFT JOIN suppliers s ON p.SID = s.SID where product_type = 'Coffee'
+            LEFT JOIN suppliers s ON p.SID = s.SID 
+            LEFT JOIN product_type pt ON p.PTID = pt.PTID
+            WHERE pt.type_name = 'Coffee'
             LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
 ?>
@@ -60,27 +62,28 @@ $result = $conn->query($sql);
 
         <div class="container menu-container">
             <ul>
-                <h6 class="menu-title">Actions</h6>
-                <li><i class="fas fa-chart-line"></i> <span>Dashboard</span></li>
-                <li><i class="fas fa-users"></i> <span>Employee</span></li>
-                <li><i class="bi bi-person-lines-fill"></i></i> <span>Roles</span></li>
-                <li><i class="bi bi-building"></i><span>Suppliers</span></li>
+                    <h6 class="menu-title">Actions</h6>
+                    <li><i class="fas fa-chart-line"></i> <span>Dashboard</span></li>
+                    <li><i class="fas fa-users"></i> <span>Employee</span></li>
+                    <li><i class="bi bi-person-lines-fill"></i></i> <span>Roles</span></li>
+                    <li><i class="bi bi-building"></i><span>Suppliers</span></li>
+                    <li><i class="bi bi-plus-square"></i><a href="add_product.php"><span>Add products</span></a></li>
 
-                <li class="dropdown" onclick="toggleDropdown(this)">
-                    <i class="fas fa-bars"></i>
-                    <span class="dropdown-text">Products</span>
-                    <i class="fas fa-chevron-right arrow-icon"></i>
-                    <ul class="dropdown-menu">
-                    <li><a class="text-truncate" href="coffee.php">Add coffee</a></li>
-                    <li><a class="text-truncate" href="pastry.php">Add pastry</a></li>
-                    <li><a class="text-truncate" href="rice_meal.php">Add rice meal</a></li>
-                    </ul>
-                </li>
 
-                <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
-                <li><i class="fas fa-wallet"></i> <span>Transactions</span></li>
-            </ul>
+                    <li class="dropdown" onclick="toggleDropdown(this,event)">
+                        <i class="bi bi-view-stacked"></i>
+                        <span class="dropdown-text">View Products</span>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="text-truncate" href="../product/coffee.php">View Coffee</a></li>
+                            <li><a class="text-truncate" href="../product/pastry.php">View Pastry</a></li>
+                            <li><a class="text-truncate" href="../product/rice_meal.php">View Rice Meal</a></li>
+                        </ul>
+                    </li>
 
+                    <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
+                    <li><i class="fas fa-wallet"></i> <span>Transactions</span></li>
+                </ul>
             <ul class="settings-container">
                 <h6 class="menu-title text-truncate px-3">Appearance</h6>
                 <li class="toggle-item">
@@ -123,8 +126,8 @@ $result = $conn->query($sql);
                     border: 2px solid #ffb3ba !important;
                     border-radius: 15px;
                     object-fit: cover;
-                    height: 60px;
-                    width: 60px !important;
+                    height: 50px;
+                    width: 120px !important;
                 }
 
                 .detailsimg {
@@ -221,7 +224,7 @@ $result = $conn->query($sql);
                                             </div>
                                         </td>
 
-                                        <td> <?php echo $row['product_type']; ?></td>
+                                        <td> <?php echo $row['type_name']; ?></td>
                                         <td><?php echo $row['company_name']; ?></td>
                                         
 

@@ -3,7 +3,6 @@ include("../database/database.php");
 $limit = 10;
 
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-
 $offset = ($page - 1) * $limit;
 
 
@@ -16,10 +15,12 @@ $totalProducts = $totalRow['total'];
 $totalPages = ceil($totalProducts / $limit);
 
 
-$sql = "SELECT p.PID, p.product_name, p.product_description,p.product_type,p.status, p.image, p.stocks, p.price,date_format(p.date,'%M. %e, %Y - %l:%i %p') 'date',
+$sql = "SELECT p.PID, p.product_name, p.product_description,p.status,pt.type_name, p.image, p.stocks, p.price,date_format(p.date,'%M. %e, %Y - %l:%i %p') 'date',
                 s.company_name 
             FROM products p
-            LEFT JOIN suppliers s ON p.SID = s.SID where product_type = 'Rice meal'
+            LEFT JOIN suppliers s ON p.SID = s.SID 
+            LEFT JOIN product_type pt ON p.PTID = pt.PTID
+            WHERE pt.type_name = 'Rice Meal'
             LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
 ?>
@@ -61,27 +62,28 @@ $result = $conn->query($sql);
 
         <div class="container menu-container">
             <ul>
-                <h6 class="menu-title">Actions</h6>
-                <li><i class="fas fa-chart-line"></i> <span>Dashboard</span></li>
-                <li><i class="fas fa-users"></i> <span>Employee</span></li>
-                <li><i class="bi bi-person-lines-fill"></i></i> <span>Roles</span></li>
-                <li><i class="bi bi-building"></i><span>Suppliers</span></li>
+                    <h6 class="menu-title">Actions</h6>
+                    <li><i class="fas fa-chart-line"></i> <span>Dashboard</span></li>
+                    <li><i class="fas fa-users"></i> <span>Employee</span></li>
+                    <li><i class="bi bi-person-lines-fill"></i></i> <span>Roles</span></li>
+                    <li><i class="bi bi-building"></i><span>Suppliers</span></li>
+                    <li><i class="bi bi-plus-square"></i><a href="add_product.php"><span>Add products</span></a></li>
 
-                <li class="dropdown" onclick="toggleDropdown(this)">
-                    <i class="fas fa-bars"></i>
-                    <span class="dropdown-text">Products</span>
-                    <i class="fas fa-chevron-right arrow-icon"></i>
-                    <ul class="dropdown-menu">
-                    <li><a class="text-truncate" href="coffee.php">Add coffee</a></li>
-                    <li><a class="text-truncate" href="pastry.php">Add pastry</a></li>
-                    <li><a class="text-truncate" href="rice_meal.php">Add rice meal</a></li>
-                    </ul>
-                </li>
 
-                <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
-                <li><i class="fas fa-wallet"></i> <span>Transactions</span></li>
-            </ul>
+                    <li class="dropdown" onclick="toggleDropdown(this,event)">
+                        <i class="bi bi-view-stacked"></i>
+                        <span class="dropdown-text">View Products</span>
+                        <i class="fas fa-chevron-right arrow-icon"></i>
+                        <ul class="dropdown-menu">
+                            <li><a class="text-truncate" href="../product/coffee.php">View Coffee</a></li>
+                            <li><a class="text-truncate" href="../product/pastry.php">View Pastry</a></li>
+                            <li><a class="text-truncate" href="../product/rice_meal.php">View Rice Meal</a></li>
+                        </ul>
+                    </li>
 
+                    <li><i class="fas fa-chart-pie"></i> <span>Reports</span></li>
+                    <li><i class="fas fa-wallet"></i> <span>Transactions</span></li>
+                </ul>
             <ul class="settings-container">
                 <h6 class="menu-title text-truncate px-3">Appearance</h6>
                 <li class="toggle-item">
@@ -124,8 +126,8 @@ $result = $conn->query($sql);
                     border: 2px solid #ffb3ba !important;
                     border-radius: 15px;
                     object-fit: cover;
-                    height: 60px;
-                    width: 60px !important;
+                    height: 50px;
+                    width: 120px !important;
                 }
 
                 .detailsimg {
@@ -143,7 +145,7 @@ $result = $conn->query($sql);
                 <div class="container my-4">
 
                         <div class="container mt-5 d-flex">
-                            <div class="col-md-6"> <p class="display-5 fw-bold">Rice meal</p>
+                            <div class="col-md-6"> <p class="display-5 fw-bold">Rice Meal</p>
                             </div>
                             <div class="col-md-6 d-inline-flex justify-content-end"> <button class="btn btn-primary" style="height: 50px; border-radius: 12px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa-solid fa-plus"></i>&nbsp;Add products
@@ -166,42 +168,7 @@ $result = $conn->query($sql);
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="row d-md-block my-md-3">
-                                                <div class="col-md-12">
-                                                    <p class="h6 fw-bold">Product name</p>
-                                                    <input type="text" class="form-control" name="pname" required>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <p class="h6 fw-bold">Description</p>
-                                                    <textarea name="pdesc" id="" class="form-control"
-                                                        required></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="row d-md-flex my-md-3">
-                                                <div class="col-md-6">
-                                                    <p class="h6 fw-bold">Supplier</p>
-                                                    <select name="supplier" id=""
-                                                        class="form-select d-inline-block w-auto">
-                                                        <option value="" disabled selected>Select Supplier</option>
-                                                        <?php
-                                                        $supplierQuery = "SELECT SID, company_name FROM suppliers";
-                                                        $supplierResult = $conn->query($supplierQuery);
-                                                        while ($supplier = $supplierResult->fetch_assoc()) {
-                                                            echo '<option value="' . $supplier['SID'] . '">' . $supplier['company_name'] . '</option>';
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p class="h6 fw-bold">Type</p>
-                                                    <input type="text" name="ptype" class="form-control">
-                                                </div>
-                                            </div>
-                                            <label class="form-label" for="customFile">Import Image</label>
-                                            <input type="file" name="img" class="form-control" accept="image/*"
-                                                id="customFile" />
-                                        </div>
+                                           
                                         <div class="modal-footer">
                                             <!-- Footer Close Button with FontAwesome -->
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -257,7 +224,7 @@ $result = $conn->query($sql);
                                             </div>
                                         </td>
 
-                                        <td> <?php echo $row['product_type']; ?></td>
+                                        <td> <?php echo $row['type_name']; ?></td>
                                         <td><?php echo $row['company_name']; ?></td>
                                         
 

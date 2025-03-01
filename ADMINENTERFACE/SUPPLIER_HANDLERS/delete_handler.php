@@ -37,6 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
         $stmt->close();
 
+        // Delete from suppliers table
+        $query = "DELETE FROM address WHERE SID = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $sid);
+        $stmt->execute();
+        $stmt->close();
+
         // Commit transaction
         $conn->commit();
         $_SESSION['success'] = "Supplier deleted successfully!";
