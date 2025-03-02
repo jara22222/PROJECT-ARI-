@@ -109,16 +109,7 @@ $result = $conn->query($sql);
         <div class="content">
         <div class="container-fluid mt-3">
             <div class="row">
-                <div class="col d-flex justify-content-end align-items-center">
-                    <div class="search-container position-relative">
-                        <form class="d-flex align-items-center">
-                            <i class="fas fa-search search-icon"></i>
-                            <input class="form-control search-input ps-5" type="search" placeholder="Search anything..."
-                                aria-label="Search">
-                            <button class="btn btn-search ms-2" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div>
+               
             </div>
         </div>
             <style>

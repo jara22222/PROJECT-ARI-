@@ -54,7 +54,7 @@
                 </div>
         <div class="main-content ">
             <div class="tabs d-flex border rounded p-2 shadow-sm">
-                <button class="tab btn form-control border active">Profile</button>
+                <button class="tab btn form-control border">Profile</button>
                 <button class="tab btn form-control border">Security</button>
             </div>
 
@@ -87,16 +87,36 @@
                                     <input type="email" class="form-control" id="email" placeholder="Email">
                                 </div>
                                 <div class="col-md-6 my-md-4">
-                                    
-                                    <label for="phone-number">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone-number" placeholder="Phone Number">
+                                     <label for="age">Age</label>
+                                    <input type="text" class="form-control" id="age" placeholder="Age">
                                 </div>
-                                <div class="col my-md-4">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Email">
+
+                                <div class="col-md-6 my-md-4">
+                                    <label for="gender">Gender</label>
+                                    <input type="text" class="form-control" id="gender" placeholder="Gender">
+                                </div>
+                                <div class="col my-md-3 my-md-4">
+                                    <label for="address">Street</label>
+                                    <input type="text" class="form-control" id="address" placeholder="Street">
+                                </div>
+                                <div class="col-md-3 my-md-4">
+                                     <label for="city">City</label>
+                                    <input type="text" class="form-control" id="city" placeholder="City">
+                                </div>
+                                <div class="col-md-3 my-md-4">
+                                    <label for="province">Province</label>
+                                    <input type="text" class="form-control" id="province" placeholder="Province">
+                                </div>
+                                <div class="col-md-3 my-md-4">
+                                    <label for="postal-code">Postal Code</label>
+                                    <input type="text" class="form-control" id="postal-code" placeholder="Postal Code">
+                                </div>
+                                
+                                <div class="col-md-12 my-md-4 d-flex justify-content-center">
+                                    <button type="submit" style="width: 16rem;" class="btn btn-primary">Save Changes</button>
+                                </div>
                             </div>
                            </form>
-                            
                         </div>
                     </div>
                 </div>
@@ -111,11 +131,11 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll(".nav-item").forEach(item => {
+      document.querySelectorAll(".nav-item, .tab").forEach(item => {
           item.addEventListener("click", function () {
               // Remove "active" from all items
-              document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("active"));
-              
+              document.querySelectorAll(".nav-item, .tab").forEach(btn => btn.classList.remove("active"));
+             
               // Add "active" to the clicked item
               this.classList.add("active");
           });
